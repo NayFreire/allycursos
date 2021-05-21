@@ -37,27 +37,83 @@
   }
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Arvo&family=Fira+Sans+Extra+Condensed:wght@400;500&display=swap');
 .container{
-  background-color: rgb(59, 121, 214);
+  background-color: #9195D9;
   display: flex;
+  align-items: center;
+  justify-content: center;
   height: auto;
 }
 
+#divLogo{
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
 .main{
-  background-color: crimson;
+  /* background-color: crimson; */
   padding: 20px;
+  margin-top: 20px;
   min-width: 700px !important;
 }
 
 .info{
-  background-color: darkorange;
+  /* background-color: darkorange; */
 }
 
 .divInput{
   display: flex;
+  margin-top: 20px;
 }
 
 .inputs{
   flex-grow: 1;
   margin-left: 30px;
+  padding: 6px;
+  border-radius: 10px;
+  border: none;
+}
+
+.inputsDate{
+  flex-grow: 1;
+  margin-left: 30px;
+  padding: 3px;
+  border-radius: 10px;
+  border: none;
+}
+
+.labelTxt{
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  font-size: 16pt;
+}
+
+#btnDivAdd{
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btnAdd{
+  color: #fff;
+  font-size: 12pt;
+  padding: 10px 30px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  background-color: #414AF2;
+  font-weight: 600;
+}
+
+#btnAdd:hover{
+  animation-name: btnBckg;
+  animation-duration: 2s;
+}
+
+@keyframes btnBckg {
+  from {background-color: #414AF2; color: #fff}
+  to {background-color: #1c28ff; color: rgb(255, 255, 255)}
 }
