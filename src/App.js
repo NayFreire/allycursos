@@ -1,7 +1,9 @@
 import logo from './images/allylogotransp.png'
 import {useState} from 'react'
 
-import './App.css';
+import './App.css'
+import './components/AddCourse.js'
+import InputDiv from './components/Input.js'
 
 let data = [
   {
@@ -33,6 +35,16 @@ let data = [
     dateEnd: '02/06/2021'
   }
 ]
+const addCourse = ({props}) => {    
+    let newCourse = {
+        id: Math.random(),
+        name: props.name,
+        duration: props.duration,
+        dateStart: props.startDate,
+        dateEnd: props.endDate
+    }
+    console.log(newCourse)    
+  }
 
 function App() {
   const [name, setName] = useState('')
@@ -40,44 +52,23 @@ function App() {
   const [endDate, setEndDate] = useState('')
   const [duration, setDuration] = useState('')
 
-  const addCouse = () => {    
-    let newCourse = {
-      id: Math.random(),
-      name: name,
-      duration: duration,
-      dateStart: startDate,
-      dateEnd: endDate
-    }
-    data.push(newCourse)
-    console.log('novo curso', newCourse)
-    console.log(data)
-  }
-
+  
+// console.log(data)
   return (
     <div className="container">
       <div className="main">
         <div id='divLogo'>
           <img src={logo} alt='logo'/>
         </div>
+        <h2 id='title'>Cadastro de Cursos</h2>
         <form className='info' action=''>
-          <div className='divInput'>
-            <label htmlFor="" className='labelTxt'>Nome</label>
-            <input type="text" className='inputs' onChange={(e) => setName(e.target.value)}/>
-          </div>
-          <div className='divInput'>
-            <label htmlFor="" className='labelTxt'>Data de Início</label>
-            <input type="date" name="dateStart" id="dateStart" className='inputsDate' onChange={(e) => setStartDate(e.target.value)}/>
-          </div>
-          <div className='divInput'>
-            <label htmlFor="" className='labelTxt'>Data de Fim</label>
-            <input type="date" name="dateEnd" id="dateEnd" className='inputsDate' onChange={(e) => setEndDate(e.target.value)}/>
-          </div>
-          <div className='divInput'>
-            <label htmlFor="" className='labelTxt'>Duração (Semanas)</label>
-            <input type="text" className='inputs' onChange={(e) => {setDuration(e.target.value)}}/>
-          </div>
+          <InputDiv nameLabel='Nome' type='text' setFunction={setName}/>
+          <InputDiv nameLabel='Data de Início' type='date' setFunction={setStartDate}/>
+          <InputDiv nameLabel='Data de Fim' type='date' setFunction={setEndDate} />
+          <InputDiv nameLabel='Duração' type='number' setFunction={setDuration} />
           <div id="btnDivAdd">
-            <input id='btnAdd' type="submit" value="Cadastrar" onClick={() => addCouse()}/>
+            <input id='btnAdd' type="submit" value="Cadastrar" 
+            onClick={addCourse(name, duration, startDate, endDate)}/>
           </div>
         </form>
       
