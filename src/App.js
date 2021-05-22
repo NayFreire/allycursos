@@ -57,7 +57,7 @@ function App() {
     <div className="container">
       <div className="main">
         <div id='divLogo'>
-          <img src = {logo} alt='logo'/>
+          <img src={logo} alt='logo'/>
         </div>
         <form className='info' action=''>
           <div className='divInput'>
