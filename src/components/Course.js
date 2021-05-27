@@ -5,6 +5,7 @@ const Course = ({course}) => {
             <td>{course.startDate}</td>
             <td>{course.endDate}</td>
             <td>{course.duration}</td>
+            <td>{course.desc}</td>
         </tr>
     )
 }

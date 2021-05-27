@@ -10,6 +10,7 @@ const Courses = ({courses}) => {
                     <th>Data de Início</th>
                     <th>Data de Fim</th>
                     <th>Duração</th>
+                    <th>Descrição</th>
                 </tr>
                 
                 <>

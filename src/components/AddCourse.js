@@ -9,6 +9,7 @@ const AddCourse = ({addCourse, courses}) => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [duration, setDuration] = useState(0)
+    const [desc, setDesc] = useState('')
 
     const today = new Date()
     let day = today.getDate()
@@ -17,13 +18,15 @@ const AddCourse = ({addCourse, courses}) => {
     
     let minDate
 
+    //Caso o dia for menor que 10, é necessário adicionar um zero na frente
     if(day<10){
         minDate = `${year}-0${day}-${day}`
     }
     else{
         minDate = `${year}-${day}-${day}`
     }
-    
+
+    //Caso o mês for menor que 10, é necessário adicionar um zero na frente
     if(month<10){
         minDate = `${year}-0${month+1}-${day}`
     }
@@ -38,15 +41,11 @@ const AddCourse = ({addCourse, courses}) => {
             name: name,
             startDate: startDate,
             endDate: endDate,
-            duration: duration
+            duration: duration,
+            desc: desc
         }
         
         addCourse({newCourse})
-
-        setName('')
-        setStartDate('')
-        setEndDate('')
-        setDuration(0)
     }
 
     return (
@@ -69,7 +68,7 @@ const AddCourse = ({addCourse, courses}) => {
                     </div>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Data Fim</label>
-                        <input type='date' className='inputs' required
+                        <input type='date' className='inputs' min={minDate} required
                         onChange={(e) => {setEndDate(e.target.value)}}/>
                     </div>
                     <div className='divInput'>
@@ -77,11 +76,26 @@ const AddCourse = ({addCourse, courses}) => {
                         <input type='number' className='inputs' required
                         onChange={(e) => {setDuration(e.target.value)}}/>
                     </div>
+                    <div className='divInput'>
+                        <label htmlFor="" className='labelTxt'>Decrição</label>
+                        <textarea className='inputs' required onChange={(e) => {setDesc(e.target.value)}}/>                        
+                    </div>
                     <div id="btnDivAdd">
                         <input id='btnAdd' type="submit" value="Cadastrar" />
                     </div>
                 </form>    
                 
+                <h2>Lista de Cursos</h2>
+                <input type='text' className='inputs' 
+                onChange={(e) => {
+                    courses.forEach(c => {
+                        if(e.target.value === c.name){
+                            console.log('ACHOU')
+                            
+                        }
+                    });
+                }}/>
+
                 <Courses courses={courses}/>        
             </div>
             
