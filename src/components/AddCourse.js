@@ -11,10 +11,19 @@ const AddCourse = ({addCourse, courses}) => {
     const [duration, setDuration] = useState(0)
 
     const today = new Date()
-    const day = today.getDate()
-    const month = today.getMonth()
-    const year = today.getFullYear()
-    let minDate = `2001-01-20`
+    let day = today.getDate()
+    let month = today.getMonth()
+    let year = today.getFullYear()
+    
+    let minDate
+
+    if(day<10){
+        minDate = `${year}-0${day}-${day}`
+    }
+    else{
+        minDate = `${year}-${day}-${day}`
+    }
+    
     if(month<10){
         minDate = `${year}-0${month+1}-${day}`
     }
