@@ -6,51 +6,51 @@ import AddCourse from './components/AddCourse'
 
 
 function App() {
-  const [course, setCourse] = useState(
+  const [courses, setCourses] = useState(
     [
       {
         id: 0,
         name: 'Curso 0',
         duration: 3,
-        dateStart: '02/06/2021',
-        dateEnd: '02/06/2021'
+        startDate: '02-06-2021',
+        endDate: '02-06-2021'
       },
       {
           id: 1,
           name: 'Curso 1',
           duration: 6,
-          dateStart: '02/06/2021',
-          dateEnd: '02/06/2021'
+          startDate: '02-06-2021',
+          endDate: '02-06-2021'
       },
       {
           id: 2,
           name: 'Curso 2',
           duration: 3,
-          dateStart: '02/06/2021',
-          dateEnd: '02/06/2021'
+          startDate: '02-06-2021',
+          endDate: '02-06-2021'
       },
       {
           id: 3,
           name: 'Curso 3',
           duration: 3,
-          dateStart: '02/06/2021',
-          dateEnd: '02/06/2021'
+          startDate: '02-06-2021',
+          endDate: '02-06-2021'
       }
     ]
   )
 
   const addCourse = ({newCourse}) => {    
-    let id = course.length
+    let id = courses.length
     console.log(id)
     console.log(newCourse)
     let courseWithId = {id, ...newCourse}
-    setCourse([...course, courseWithId])
+    setCourses([...courses, courseWithId])
     console.log({courseWithId})
     // console.log(course)
   }
 
   return(
-    <AddCourse addCourse={addCourse}/>
+    <AddCourse addCourse={addCourse} courses={courses}/>
   )  
 }
 
