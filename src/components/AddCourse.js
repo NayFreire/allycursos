@@ -89,9 +89,11 @@ const AddCourse = ({addCourse, courses}) => {
                 <input type='text' className='inputs' 
                 onChange={(e) => {
                     courses.forEach(c => {
-                        if(e.target.value === c.name){
+                        if(e.target.value === c.name.toLowerCase() || e.target.value === c.name.toLowerCase()){
                             console.log('ACHOU')
-                            
+                            courses.length = 0
+                            courses.push(c)
+                            console.log('pós-pesquisa: '+courses[0])
                         }
                     });
                 }}/>
