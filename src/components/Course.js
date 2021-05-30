@@ -1,5 +1,6 @@
 const Course = ({course}) => {
-    return(
+    /* MOSTRANDO CADA DADO EM SUA RESPECTIVA COLUNA */
+    return(        
         <tr>
             <td>{course.name}</td>
             <td>{course.duration}</td>

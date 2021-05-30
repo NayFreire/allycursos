@@ -12,7 +12,7 @@ const Courses = ({courses}) => {
                     <th>Data de Fim</th>
                 </tr>
                 
-                <>
+                <>{/* MAPEANDO O ARRAY DE CURSOS PARA MOSTRAR SEUS DADOS NA TABELA */}
                     {
                         courses.map((course) => (
                             <Course key={course.id} course={course} />

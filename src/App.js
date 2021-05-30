@@ -1,4 +1,3 @@
-
 import {useState} from 'react'
 
 import './App.css'
@@ -6,6 +5,7 @@ import AddCourse from './components/AddCourse'
 
 
 function App() {
+  /* DADOS QUE SERÃO MOSTRADOS NA TABELA DE CURSOS */
   const [courses, setCourses] = useState(
     [
       {
@@ -13,46 +13,39 @@ function App() {
         name: 'Curso 0',
         duration: 3,
         startDate: '2021-06-02',
-        endDate: '2021-06-02',
-        desc: 'Eu magna ad id duis minim do magna magna laboris cillum velit. Deserunt cupidatat incididunt sunt'
+        endDate: '2021-06-02'
       },
       {
           id: 1,
           name: 'Curso 1',
           duration: 6,
           startDate: '2021-06-02',
-          endDate: '2021-06-02',
-          desc: 'Eu magna ad id duis minim do magna magna laboris cillum velit. Deserunt cupidatat incididunt sunt'
+          endDate: '2021-06-02'
       },
       {
           id: 2,
           name: 'Curso 2',
           duration: 3,
           startDate: '2021-06-02',
-          endDate: '2021-06-02',
-          desc: 'Eu magna ad id duis minim do magna magna laboris cillum velit. Deserunt cupidatat incididunt sunt'
+          endDate: '2021-06-02'
       },
       {
           id: 3,
           name: 'Curso 3',
           duration: 3,
           startDate: '2021-06-02',
-          endDate: '2021-06-02',
-          desc: 'Eu magna ad id duis minim do magna magna laboris cillum velit. Deserunt cupidatat incididunt sunt'
+          endDate: '2021-06-02'
       }
     ]
   )
-
+  /* FUNÇÃO PARA A INSERÇÃO DE NOVOS CURSOS */
   const addCourse = ({newCourse}) => {    
     let id = courses.length
-    console.log(id)
-    console.log(newCourse)
     let courseWithId = {id, ...newCourse}
     setCourses([...courses, courseWithId])
-    console.log({courseWithId})
-    // console.log(course)
   }
 
+  /* CHAMANDO O COMPONENTE DE ADIÇÃO DE CURSO */
   return(
     <AddCourse addCourse={addCourse} courses={courses}/>
   )  

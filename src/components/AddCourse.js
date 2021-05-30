@@ -4,26 +4,27 @@ import {useState} from 'react'
 import '../App.css'
 import Courses from '../components/Courses.js'
 
+
 const AddCourse = ({addCourse, courses}) => {
+    /* ATRIBUTOS DA TABELA */
     const [name, setName] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [duration, setDuration] = useState(0)
     const [desc, setDesc] = useState('')
 
+    /* ATRIBUTOS DE BUSCA */
     const [searching, setSearching] = useState(false)
     const [searchWord, setSearchWord] = useState('')
     const [searchResult, setSearchResult] = useState([])
 
+    /* LIDANDO COM AS DATAS */
     const today = new Date()
-    let day = today.getDay()
+    let day = today.getDate()
     let month = today.getMonth()
     let year = today.getFullYear()
     
     let minDateStart
-    let minDateEnd = new Date()
-    minDateEnd.setDate(minDateEnd + 7)
-
 
     //Caso o dia for menor que 10, é necessário adicionar um zero na frente
     if(day<10){
@@ -41,6 +42,9 @@ const AddCourse = ({addCourse, courses}) => {
         minDateStart = `${year}-${month+1}-${day}`
     }
 
+    console.log(minDateStart)
+
+    /* AO ENVIAR UM NOVO CURSO */
     const onSubmit = (e) => {
         e.preventDefault()
 
@@ -55,15 +59,15 @@ const AddCourse = ({addCourse, courses}) => {
         addCourse({newCourse})
     }
 
+    /* BUSCANDO UM CURSO */
+
     const filtering = (searchWord) => {
-        console.log('filtering: ', searchWord)
 
         let resultSearch = courses.filter((c) => {
             return c.name.toLowerCase().indexOf(searchWord.toLowerCase()) > -1;
         })
         
         setSearchResult(resultSearch)
-        console.log({resultSearch})
     }
 
     return (
@@ -72,7 +76,7 @@ const AddCourse = ({addCourse, courses}) => {
                 <div id='divLogo'>
                 <img src={logo} alt='logo'/>
                 </div>
-                <h2 id='title'>Cadastro de Cursos</h2>
+                <h2 className='titles'>Cadastro de Cursos</h2>
                 <form className='info' action='' onSubmit={onSubmit}>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Nome</label>
@@ -81,12 +85,12 @@ const AddCourse = ({addCourse, courses}) => {
                     </div>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Data Início</label>
-                        <input type='date' className='inputs' min={minDateStart} required
+                        <input type='date' className='inputsDate' min={minDateStart} required
                         onChange={(e) => {setStartDate(e.target.value)}}/>
                     </div>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Data Fim</label>
-                        <input type='date' className='inputs' min={startDate} required
+                        <input type='date' className='inputsDate' min={startDate} required
                         onChange={(e) => {setEndDate(e.target.value)}}/>
                     </div>
                     <div className='divInput'>
@@ -103,36 +107,28 @@ const AddCourse = ({addCourse, courses}) => {
                     </div>
                 </form>    
                 
-                <h2>Lista de Cursos</h2>
-                <input type='search' className='inputs' 
-                onChange={(e) => {
-                    setSearchWord(e.target.value)
-                    filtering(e.target.value)
-                    // courses.forEach(c => {
-                        // if(e.target.value === c.name.toLowerCase() || e.target.value === c.name.toLowerCase()){
-                            // console.log('ACHOU')
-                            // courses.length = 0
-                            // courses.push(c)
-                            // console.log(courses)
-                            // console.log('search: ', searchWord)
-                            setSearching(true)
-                            // console.log('lista')
-                            // console.log(c)
-                            // searchingCourse(c, searchWord)
-                            
-                        // }
-                    // });
-                }}/>
+                <div id='listTable'>
+                    <h2 className='titles'>Lista de Cursos</h2>
+                    <input type='search' id='inputSearch' placeholder='Informe o nome do curso'
+                    onChange={(e) => {
+                        //Quando um curso é buscado, é preciso...
+                        setSearchWord(e.target.value) //pegar o nome do curso para a busca
+                        filtering(e.target.value) //filtrar esse nome dentro do array de cursos
+                        setSearching(true) //indicar que uma busca está acontecendo
+                    }}/>
 
-                {
-                    searching ? 
-                    (searchResult.length == 0 ? 
-                        <p>Não foi encontrado</p> 
-                        : 
-                        <Courses courses={searchResult}/>) 
-                    : 
-                    (<Courses courses={courses}/>)
-                }                        
+                    <div id='table'>
+                        {
+                            searching ? //Se uma busca está acontecendo, é preciso analisar se foi obtido algum resultado...
+                            (searchResult.length == 0 ?  //Se não foi obtido um resultado...
+                                <p className='labelTxt'>Não foi encontrado</p> //é mostrada a mensagem
+                                : 
+                                <Courses courses={searchResult}/>) //Se é obtido resultado, o mesmo é mostrado
+                            : 
+                            (<Courses courses={courses}/>) //Caso não esteja ocorrendo uma busca, são mostrados todos os cursos cadastrados
+                        }   
+                    </div>  
+                </div>                       
             </div>
             
         </div>
