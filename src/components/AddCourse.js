@@ -11,6 +11,11 @@ const AddCourse = ({addCourse, courses}) => {
     const [duration, setDuration] = useState(0)
     const [desc, setDesc] = useState('')
 
+    const [searching, setSearching] = useState(false)
+    const [searchWord, setSearchWord] = useState('')
+    const [searchResult, setSearchResult] = useState(courses)
+    // const debouncedTerm = useDeb
+
     const today = new Date()
     let day = today.getDate()
     let month = today.getMonth()
@@ -45,7 +50,19 @@ const AddCourse = ({addCourse, courses}) => {
             desc: desc
         }
         
-        addCourse({newCourse})
+        addCourse({newCourse, searchResult})
+    }
+
+    const searchingCourse = ({courses, searchWord}) => {
+        let courseFound = []
+        courses.forEach(c => {
+            if(searchWord.toLowerCase() === c.name.toLowerCase()){
+                console.log('ACHOU')
+                courses.length = 0
+                courseFound.push(c)
+                setSearchResult(courseFound)
+            }
+        });
     }
 
     return (
@@ -86,19 +103,15 @@ const AddCourse = ({addCourse, courses}) => {
                 </form>    
                 
                 <h2>Lista de Cursos</h2>
-                <input type='text' className='inputs' 
+                <input type='search' className='inputs' 
                 onChange={(e) => {
-                    courses.forEach(c => {
-                        if(e.target.value === c.name.toLowerCase() || e.target.value === c.name.toLowerCase()){
-                            console.log('ACHOU')
-                            courses.length = 0
-                            courses.push(c)
-                            console.log('pós-pesquisa: '+courses[0])
-                        }
-                    });
+                    setSearchWord(e.target.value)
+                    setSearching(true)
+                    searchingCourse(searchResult, searchWord)                    
                 }}/>
-
-                <Courses courses={courses}/>        
+    
+                <Courses courses={searchResult}/> 
+                        
             </div>
             
         </div>

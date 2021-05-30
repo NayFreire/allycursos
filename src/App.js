@@ -43,14 +43,14 @@ function App() {
     ]
   )
 
-  const addCourse = ({newCourse}) => {    
-    let id = courses.length
-    console.log(id)
-    console.log(newCourse)
+  const addCourse = ({newCourse, searchResult}) => {    
+    let id = searchResult.length
+    // console.log(id)
+    // console.log(newCourse)
     let courseWithId = {id, ...newCourse}
-    setCourses([...courses, courseWithId])
-    console.log({courseWithId})
-    // console.log(course)
+    setCourses([...searchResult, courseWithId])
+    // console.log({courseWithId})
+    // console.log({courses})
   }
 
   return(

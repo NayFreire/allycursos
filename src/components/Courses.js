@@ -1,6 +1,7 @@
 import Course from '../components/Course.js'
 
 const Courses = ({courses}) => {
+    console.log('+++++ Courses +++++')
     console.log({courses})
     return(
         <table>
