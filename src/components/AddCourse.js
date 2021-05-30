@@ -52,17 +52,6 @@ const AddCourse = ({addCourse, courses}) => {
         addCourse({newCourse})
     }
 
-    const searchingCourse = ({course, searchWord}) => {
-        let courseFound = []
-        console.log('In searchingCourse: ', searchWord)
-        if(searchWord.toLowerCase() === course.name.toLowerCase()){
-            console.log('ACHOU')
-            courses.length = 0
-            courseFound.push(course)
-            setSearchResult(courseFound)
-        }    
-    }
-
     const filtering = (searchWord) => {
         console.log('filtering: ', searchWord)
 
@@ -70,6 +59,7 @@ const AddCourse = ({addCourse, courses}) => {
             return c.name.toLowerCase().indexOf(searchWord.toLowerCase()) > -1;
         })
         
+        setSearchResult(resultSearch)
         console.log({resultSearch})
     }
 
@@ -122,7 +112,7 @@ const AddCourse = ({addCourse, courses}) => {
                             // courses.push(c)
                             // console.log(courses)
                             // console.log('search: ', searchWord)
-                            // setSearching(true)
+                            setSearching(true)
                             // console.log('lista')
                             // console.log(c)
                             // searchingCourse(c, searchWord)
@@ -130,8 +120,16 @@ const AddCourse = ({addCourse, courses}) => {
                         // }
                     // });
                 }}/>
-                {searching ? <p>Procurando...</p> : <Courses courses={courses}/>}
-                        
+
+                {
+                    searching ? 
+                    (searchResult.length == 0 ? 
+                        <p>Não foi encontrado</p> 
+                        : 
+                        <Courses courses={searchResult}/>) 
+                    : 
+                    (<Courses courses={courses}/>)
+                }                        
             </div>
             
         </div>
