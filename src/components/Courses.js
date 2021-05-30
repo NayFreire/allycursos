@@ -7,10 +7,9 @@ const Courses = ({courses}) => {
             <tbody>
                 <tr>
                     <th>Nome</th>
+                    <th>Duração</th>
                     <th>Data de Início</th>
                     <th>Data de Fim</th>
-                    <th>Duração</th>
-                    <th>Descrição</th>
                 </tr>
                 
                 <>

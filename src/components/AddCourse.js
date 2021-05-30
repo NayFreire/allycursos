@@ -16,26 +16,29 @@ const AddCourse = ({addCourse, courses}) => {
     const [searchResult, setSearchResult] = useState([])
 
     const today = new Date()
-    let day = today.getDate()
+    let day = today.getDay()
     let month = today.getMonth()
     let year = today.getFullYear()
     
-    let minDate
+    let minDateStart
+    let minDateEnd = new Date()
+    minDateEnd.setDate(minDateEnd + 7)
+
 
     //Caso o dia for menor que 10, é necessário adicionar um zero na frente
     if(day<10){
-        minDate = `${year}-0${day}-${day}`
+        minDateStart = `${year}-0${day}-${day}`
     }
     else{
-        minDate = `${year}-${day}-${day}`
+        minDateStart = `${year}-${day}-${day}`
     }
 
     //Caso o mês for menor que 10, é necessário adicionar um zero na frente
     if(month<10){
-        minDate = `${year}-0${month+1}-${day}`
+        minDateStart = `${year}-0${month+1}-${day}`
     }
     else{
-        minDate = `${year}-${month+1}-${day}`
+        minDateStart = `${year}-${month+1}-${day}`
     }
 
     const onSubmit = (e) => {
@@ -78,17 +81,17 @@ const AddCourse = ({addCourse, courses}) => {
                     </div>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Data Início</label>
-                        <input type='date' className='inputs' min={minDate} required
+                        <input type='date' className='inputs' min={minDateStart} required
                         onChange={(e) => {setStartDate(e.target.value)}}/>
                     </div>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Data Fim</label>
-                        <input type='date' className='inputs' min={minDate} required
+                        <input type='date' className='inputs' min={startDate} required
                         onChange={(e) => {setEndDate(e.target.value)}}/>
                     </div>
                     <div className='divInput'>
                         <label htmlFor="" className='labelTxt'>Duração</label>
-                        <input type='number' className='inputs' required
+                        <input type='number' className='inputs' min={1} required
                         onChange={(e) => {setDuration(e.target.value)}}/>
                     </div>
                     <div className='divInput'>
