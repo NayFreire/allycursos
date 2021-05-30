@@ -11,6 +11,10 @@ const AddCourse = ({addCourse, courses}) => {
     const [duration, setDuration] = useState(0)
     const [desc, setDesc] = useState('')
 
+    const [searching, setSearching] = useState(false)
+    const [searchWord, setSearchWord] = useState('')
+    const [searchResult, setSearchResult] = useState([])
+
     const today = new Date()
     let day = today.getDate()
     let month = today.getMonth()
@@ -46,6 +50,27 @@ const AddCourse = ({addCourse, courses}) => {
         }
         
         addCourse({newCourse})
+    }
+
+    const searchingCourse = ({course, searchWord}) => {
+        let courseFound = []
+        console.log('In searchingCourse: ', searchWord)
+        if(searchWord.toLowerCase() === course.name.toLowerCase()){
+            console.log('ACHOU')
+            courses.length = 0
+            courseFound.push(course)
+            setSearchResult(courseFound)
+        }    
+    }
+
+    const filtering = (searchWord) => {
+        console.log('filtering: ', searchWord)
+
+        let resultSearch = courses.filter((c) => {
+            return c.name.toLowerCase().indexOf(searchWord.toLowerCase()) > -1;
+        })
+        
+        console.log({resultSearch})
     }
 
     return (
@@ -86,19 +111,27 @@ const AddCourse = ({addCourse, courses}) => {
                 </form>    
                 
                 <h2>Lista de Cursos</h2>
-                <input type='text' className='inputs' 
+                <input type='search' className='inputs' 
                 onChange={(e) => {
-                    courses.forEach(c => {
-                        if(e.target.value === c.name.toLowerCase() || e.target.value === c.name.toLowerCase()){
-                            console.log('ACHOU')
-                            courses.length = 0
-                            courses.push(c)
-                            console.log('pós-pesquisa: '+courses[0])
-                        }
-                    });
+                    setSearchWord(e.target.value)
+                    filtering(e.target.value)
+                    // courses.forEach(c => {
+                        // if(e.target.value === c.name.toLowerCase() || e.target.value === c.name.toLowerCase()){
+                            // console.log('ACHOU')
+                            // courses.length = 0
+                            // courses.push(c)
+                            // console.log(courses)
+                            // console.log('search: ', searchWord)
+                            // setSearching(true)
+                            // console.log('lista')
+                            // console.log(c)
+                            // searchingCourse(c, searchWord)
+                            
+                        // }
+                    // });
                 }}/>
-
-                <Courses courses={courses}/>        
+                {searching ? <p>Procurando...</p> : <Courses courses={courses}/>}
+                        
             </div>
             
         </div>
